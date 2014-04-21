@@ -1,4 +1,4 @@
-package  
+package view
 {
 	import flash.display.MovieClip;
 	
@@ -8,7 +8,7 @@ package
 	 */
 	public class Tool extends MovieClip 
 	{
-		private var _remains:Number;
+		private var _remains:Number = 20;
 		private var _type:Number;
 		
 		public function Tool() 

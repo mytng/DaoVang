@@ -1,7 +1,10 @@
-package  
+package view
 {
 	import flash.display.MovieClip;
 	import flash.events.MouseEvent;
+	import flash.events.Event;
+	
+	import utils.Constant;
 	
 	/**
 	 * ...
@@ -19,6 +22,17 @@ package
 			addEventListener(MouseEvent.MOUSE_OVER, onMouseOver);
 			addEventListener(MouseEvent.MOUSE_OUT, onMouseOut);
 			addEventListener(MouseEvent.CLICK, onClick);
+			
+			addEventListener(Event.REMOVED_FROM_STAGE, onRemoved);
+		}
+		
+		private function onRemoved(e:Event):void 
+		{
+			removeEventListener(Event.REMOVED_FROM_STAGE, onRemoved);
+			
+			removeEventListener(MouseEvent.MOUSE_OVER, onMouseOver);
+			removeEventListener(MouseEvent.MOUSE_OUT, onMouseOut);
+			removeEventListener(MouseEvent.CLICK, onClick);
 		}
 		
 		private function onClick(e:MouseEvent):void
@@ -123,12 +137,13 @@ package
 		//khi ô đất hoàn toàn bị đào
 		private function breakTile():void 
 		{
+			var newTile:Tile;
 			if (i - 1 >= 0)
 			{
 				Main(this.parent.parent).mapArr[this.i - 1][this.j] = int(Main(this.parent.parent).mapArr[this.i - 1][this.j] / 10);
 				Main(this.parent.parent).mapArr[this.i - 1][this.j] *= 10;
 				this.parent.removeChild(this.parent.getChildByName("t_" + (this.i - 1) + "_" + this.j));
-				var newTile:Tile = createTile(int(Main(this.parent.parent).mapArr[this.i - 1][this.j] / 100), this.x, this.y - Constant.TILE_HEIGHT, this.i-1, this.j);
+				newTile = createTile(int(Main(this.parent.parent).mapArr[this.i - 1][this.j] / 100), this.x, this.y - Constant.TILE_HEIGHT, this.i-1, this.j);
 				this.parent.addChild(newTile);
 			}
 			if ( j - 1 >= 0 )
@@ -136,7 +151,7 @@ package
 				Main(this.parent.parent).mapArr[this.i][this.j-1] = int(Main(this.parent.parent).mapArr[this.i][this.j-1] / 10);
 				Main(this.parent.parent).mapArr[this.i][this.j - 1] *= 10;
 				this.parent.removeChild(this.parent.getChildByName("t_" + this.i + "_" + (this.j - 1)));
-				var newTile:Tile = createTile(int(Main(this.parent.parent).mapArr[this.i][this.j - 1] / 100), this.x - Constant.TILE_WIDTH, this.y, this.i, this.j - 1);
+				newTile = createTile(int(Main(this.parent.parent).mapArr[this.i][this.j - 1] / 100), this.x - Constant.TILE_WIDTH, this.y, this.i, this.j - 1);
 				trace(newTile.name);
 				this.parent.addChild(newTile);
 			}
@@ -145,7 +160,7 @@ package
 				Main(this.parent.parent).mapArr[this.i][this.j+1] = int(Main(this.parent.parent).mapArr[this.i][this.j+1] / 10);
 				Main(this.parent.parent).mapArr[this.i][this.j + 1] *= 10;
 				this.parent.removeChild(this.parent.getChildByName("t_" + this.i + "_" + (this.j + 1)));
-				var newTile:Tile = createTile(int(Main(this.parent.parent).mapArr[this.i][this.j + 1] / 100), this.x + Constant.TILE_WIDTH, this.y, this.i, this.j + 1);
+				newTile = createTile(int(Main(this.parent.parent).mapArr[this.i][this.j + 1] / 100), this.x + Constant.TILE_WIDTH, this.y, this.i, this.j + 1);
 				this.parent.addChild(newTile);
 			}
 			if (i + 1 <= Main(this.parent.parent).mapArr.length)
@@ -155,7 +170,7 @@ package
 				Main(this.parent.parent).mapArr[this.i + 1][this.j] *= 10;
 				trace(Main(this.parent.parent).mapArr[this.i + 1][this.j]);
 				this.parent.removeChild(this.parent.getChildByName("t_" + (this.i + 1) + "_" + this.j));
-				var newTile:Tile = createTile(int(Main(this.parent.parent).mapArr[this.i + 1][this.j] / 100), this.x, this.y + Constant.TILE_HEIGHT, this.i + 1, this.j);
+				newTile = createTile(int(Main(this.parent.parent).mapArr[this.i + 1][this.j] / 100), this.x, this.y + Constant.TILE_HEIGHT, this.i + 1, this.j);
 				this.parent.addChild(newTile);
 				trace(newTile.name+i+","+j);
 			}
