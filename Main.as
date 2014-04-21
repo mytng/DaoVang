@@ -12,35 +12,36 @@ package
 	 */
 	public class Main extends MovieClip
 	{
-		var mapArr:Array = 
-		[ [42,52,12,22,32,42,52,12,22,32,42,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,12,22,32,42,50,51,42],
-		  [42,52,12,22,32,42,52,12,22,32,42,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,12,22,32,42,50,51,42],
-		  [42,50,12,22,32,42,52,12,22,32,42,52,52,32,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,12,22,32,42,50,51,42],
-		  [42,50,12,22,32,42,52,12,22,32,42,52,52,22,32,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,12,22,32,42,50,51,32],
-		  [42,52,10,22,32,42,52,12,22,32,42,52,52,12,52,52,52,52,32,32,52,52,52,52,52,52,52,52,52,52,52,52,52,12,22,32,42,50,51,22],
-		  [40,50,10,22,32,42,52,12,22,32,42,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,12,22,32,42,50,51,12],
-		  [40,50,10,22,32,42,52,12,22,32,42,52,52,42,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,12,22,32,42,50,51,52],
-		  [42,50,12,22,32,42,52,12,22,32,42,52,52,32,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,12,22,32,42,50,51,42],
-		  [42,50,12,22,32,42,52,12,22,32,42,52,52,22,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,12,22,32,42,50,51,32],
-		  [32,20,32,52,52,52,52,52,52,52,52,52,52,12,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,32,40,11,22],
-		  [32,20,32,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,32,30,11,12],
-		  [32,20,32,52,52,52,52,52,52,52,52,52,52,42,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,32,20,11,52],
-		  [32,20,32,52,52,52,52,52,52,52,52,52,52,32,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,32,10,11,42],
-		  [32,20,32,52,52,52,52,52,52,52,52,52,52,22,52,52,52,22,22,22,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,22,32,50,11,32],
-		  [32,52,52,52,52,52,52,52,52,52,52,52,52,12,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,32,40,11,12],
-		  [32,20,32,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,32,30,11,12],
-		  [32,30,52,52,52,52,52,52,32,32,52,52,52,42,32,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,32,20,11,12],
-		  [32,32,20,52,52,52,52,52,52,52,52,52,52,32,52,52,52,52,32,32,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,32,10,11,12],
-		  [30,50,30,32,32,32,52,52,52,52,52,52,52,22,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,32,50,11,12],
-		  [20,40,40,52,52,52,32,52,52,52,52,52,52,12,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,32,40,11,12],
-		  [32,20,32,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,32,30,11,12],
-		  [32,20,32,52,52,52,52,52,52,52,52,52,52,42,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,32,20,11,12],
-		  [32,20,32,52,52,52,52,52,52,52,52,52,52,32,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,32,10,11,12],
-		  [32,20,32,52,52,52,52,52,52,52,52,52,52,22,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,32,50,11,12],
-		  [32,20,32,52,52,52,52,52,52,52,52,52,52,12,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,32,40,11,12],
-		  [32,20,32,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,32,30,11,12],
-		  [32,20,32,52,52,52,52,52,52,52,52,52,52,42,52,52,52,22,22,22,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,22,32,20,11,12],
-		  [32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,52,52,52,52,52,52,52,52,52,52,52,52,52,52,52,32,32,10,11,12] ];
+		//số hàng trăm là loại của ô đất, số hàng chục là phần thưởng có thể đào được, số hàng đơn vị chỉ định ô đất đã đc nhìn thấy hay chưa
+		public var mapArr:Array = 
+		[ [420,520,120,220,320,420,520,120,220,320,420,520,520,520,520,520,520,520,520,520,520,520,520,520,520,520,520,520,520,520,520,520,520,120,220,320,420,500,510,420],
+		  [421,321,121,221,321,421,521,121,221,321,421,521,521,521,521,521,621,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,121,221,321,421,501,511,421],
+		  [421,501,121,221,321,421,521,121,221,321,421,521,521,321,521,521,621,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,121,221,321,421,501,511,421],
+		  [421,501,121,221,321,421,521,121,221,321,421,521,521,221,321,521,621,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,121,221,321,421,501,511,321],
+		  [421,521,101,221,321,421,521,121,221,321,421,521,521,121,521,521,621,521,321,321,521,521,521,521,521,521,521,521,521,521,521,521,521,121,221,321,421,501,511,221],
+		  [401,501,101,221,321,421,521,121,221,321,421,521,521,521,521,521,621,621,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,121,221,321,421,501,511,121],
+		  [401,501,101,221,321,421,521,121,221,321,421,521,521,421,521,521,521,621,521,621,621,521,521,521,521,521,521,521,521,521,521,521,521,121,221,321,421,501,511,521],
+		  [421,501,121,221,321,421,521,121,221,321,421,521,521,321,521,521,521,621,521,621,621,521,521,521,521,521,521,521,521,521,521,521,521,121,221,321,421,501,511,421],
+		  [421,501,121,221,321,421,521,121,221,321,421,521,521,221,521,521,521,621,621,621,621,521,521,521,521,521,521,521,521,521,521,521,521,121,221,321,421,501,511,321],
+		  [321,201,321,521,521,521,521,521,521,521,521,521,521,121,521,521,521,521,521,621,621,621,521,521,521,521,521,521,521,521,521,521,521,521,521,521,321,401,111,221],
+		  [321,201,321,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,321,301,111,121],
+		  [321,201,321,521,521,521,521,521,521,521,521,521,521,421,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,321,201,111,521],
+		  [321,201,321,521,521,521,521,521,521,521,521,521,521,321,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,321,101,111,421],
+		  [321,201,321,521,521,521,521,521,521,521,521,521,521,221,521,521,521,221,221,221,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,221,321,501,111,321],
+		  [321,521,521,521,521,521,521,521,521,521,521,521,521,121,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,321,401,111,121],
+		  [321,201,321,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,321,301,111,121],
+		  [321,301,521,521,521,521,521,521,321,321,521,521,521,421,321,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,321,201,111,121],
+		  [321,321,201,521,521,521,521,521,521,521,521,521,521,321,521,521,521,521,321,321,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,321,101,111,121],
+		  [301,501,301,321,321,321,521,521,521,521,521,521,521,221,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,321,501,111,121],
+		  [201,401,401,521,521,521,321,521,521,521,521,521,521,121,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,321,401,111,121],
+		  [321,201,321,521,521,521,521,521,521,521,521,521,521,521,521,521,151,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,321,301,111,121],
+		  [321,201,321,521,521,521,521,521,521,521,521,521,521,421,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,321,201,111,121],
+		  [321,201,321,521,521,521,521,521,521,521,521,521,521,321,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,321,101,111,121],
+		  [321,201,321,521,521,521,521,521,521,521,521,521,521,221,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,321,501,111,121],
+		  [321,201,321,521,521,521,521,521,521,521,521,521,521,121,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,321,401,111,121],
+		  [321,201,321,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,321,301,111,121],
+		  [321,201,321,521,521,521,521,521,521,521,521,521,521,421,521,521,521,221,221,221,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,221,321,201,111,121],
+		  [321,321,321,321,321,321,321,321,321,321,321,321,321,321,321,321,321,321,321,321,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,321,321,101,111,121] ];
 		
 		// chiều dài và chiều rộng của map
 		var mapW:Number = mapArr[0].length;
@@ -63,8 +64,8 @@ package
 		var visAreaY:Number = screenH - SPACE_HEIGHT; 
 		
 		// chiều rộng và chiều cao của 1 ô đất theo pixel
-		var tileW:Number = 40;
-		var tileH:Number = 40;
+		var tileW:Number = Constant.TILE_WIDTH;
+		var tileH:Number = Constant.TILE_HEIGHT;
 		
 		// vị trí của movieclip chứa map
 		var startX:Number = 0;
@@ -85,12 +86,13 @@ package
 		var diffY:Number;
 		
 		//công cụ đang được chọn
-		var currentTool:MovieClip;
+		public var currentTool:Tool;
+
 		var toolArray:Array;
 		
 		public function Main()
 		{
-			mapContainer = new Empty();
+			mapContainer = new Container();
 			addChild(mapContainer);
 			mapContainer.x = 0;
 			mapContainer.y = 0;
@@ -174,12 +176,24 @@ package
 						{
 							for (var lastj:Number = curMapArrX; lastj < (curMapArrX + 1); ++lastj)
 							{
-								var tempTile:MovieClip = createTile(int(mapArr[lasti][lastj] / 10));
+								var tempTile:MovieClip;
+								if (mapArr[lasti][lastj] % 10 == 1)
+								{
+									tempTile = new Fog();
+									Fog(tempTile).i = lasti;
+									Fog(tempTile).j = lastj;
+								}
+								else
+								{
+									tempTile = createTile(int(mapArr[lasti][lastj] / 100));  
+								}
 								tempTile.name = "t_" + lasti + "_" + (lastj);
 								mapContainer.addChild(tempTile);
 								
 								tempTile.x = (lastj - initArrX) * tileW + startX;
 								tempTile.y = lasti * tileH + startY;
+								Tile(tempTile).i = lasti;
+								Tile(tempTile).j = lastj;
 
 								mapContainer.removeChild(mapContainer.getChildByName("t_" + lasti + "_" + (lastj + visAreaX + 1)));
 							}
@@ -196,13 +210,25 @@ package
 						{
 							for (var lastj = curMapArrX + visAreaX + 1; lastj < (visAreaX + 1 + curMapArrX + 1); ++lastj)
 							{
-								var tempTile:MovieClip = createTile(int(mapArr[lasti][lastj] / 10));
+								var tempTile:MovieClip;
+								if (mapArr[lasti][lastj] % 10 == 1)
+								{
+									tempTile = new Fog();
+									Fog(tempTile).i = lasti;
+									Fog(tempTile).j = lastj;
+								}
+								else
+								{
+									tempTile = createTile(int(mapArr[lasti][lastj] / 100));  
+								}
 								tempTile.name = "t_" + lasti + "_" + lastj;
 								mapContainer.addChild(tempTile);
 								
 								tempTile.x = (lastj - initArrX) * tileW + startX;
 								tempTile.y = lasti * tileH + startY;
-								
+								Tile(tempTile).i = lasti;
+								Tile(tempTile).j = lastj;
+								trace("t_" + lasti + "_" + (lastj - visAreaX - 1));
 								mapContainer.removeChild(mapContainer.getChildByName("t_" + lasti + "_" + (lastj - visAreaX - 1)));
 							}
 						}
@@ -220,12 +246,24 @@ package
 						{
 							for (var lastj = curMapArrX; lastj < (visAreaX + 1 + curMapArrX); ++lastj)
 							{
-								var tempTile:MovieClip = createTile(int(mapArr[lasti][lastj] / 10));
+								var tempTile:MovieClip;
+								if (mapArr[lasti][lastj] % 10 == 1)
+								{
+									tempTile = new Fog();
+									Fog(tempTile).i = lasti;
+									Fog(tempTile).j = lastj;
+								}
+								else
+								{
+									tempTile = createTile(int(mapArr[lasti][lastj] / 100));  
+								}
 								tempTile.name = "t_" + lasti + "_" + lastj;
 								mapContainer.addChild(tempTile);
 								
 								tempTile.x = (lastj - curMapArrX) * tileW + startX-(initArrX-curMapArrX)*tileW;
 								tempTile.y = lasti * tileH + startY;
+								Tile(tempTile).i = lasti;
+								Tile(tempTile).j = lastj;
 								
 								mapContainer.removeChild(mapContainer.getChildByName("t_" + (lasti - visAreaY - 1-2) + "_" + (lastj)));
 							}
@@ -248,12 +286,24 @@ package
 						{
 							for (var lastj:Number = curMapArrX; lastj < (curMapArrX + visAreaX + 1); ++lastj)
 							{
-								var tempTile:MovieClip = createTile(int(mapArr[lasti][lastj] / 10));
+								var tempTile:MovieClip;
+								if (mapArr[lasti][lastj] % 10 == 1)
+								{
+									tempTile = new Fog();
+									Fog(tempTile).i = lasti;
+									Fog(tempTile).j = lastj;
+								}
+								else
+								{
+									tempTile = createTile(int(mapArr[lasti][lastj] / 100));  
+								}
 								tempTile.name = "t_" + lasti + "_" + (lastj);
 								mapContainer.addChild(tempTile);
 								
 								tempTile.x = (lastj - curMapArrX) * tileW + startX-(initArrX-curMapArrX)*tileW;
 								tempTile.y = lasti * tileH + startY;
+								Tile(tempTile).i = lasti;
+								Tile(tempTile).j = lastj;
 								
 								mapContainer.removeChild(mapContainer.getChildByName("t_" + (lasti + visAreaY + 1+2) + "_" + (lastj)));
 							}
@@ -271,11 +321,23 @@ package
 			{
 				for (var j:Number = curMapArrX; j < visAreaX + curMapArrX + 1; ++j)  //+ 1 cột tile được vẽ trước ở bên phải
 				{
-					var tempTile:MovieClip = createTile(int(mapArr[i][j] / 10));  
+					var tempTile:MovieClip;
+					if (mapArr[i][j] % 10 == 1)
+					{
+						tempTile = new Fog();
+						Fog(tempTile).i = i;
+						Fog(tempTile).j = j;
+					}
+					else
+					{
+						tempTile = createTile(int(mapArr[i][j] / 100));  
+					}
 					tempTile.name = "t_" + i + "_" + j;
 					mapContainer.addChild(tempTile);
 					tempTile.x = (j - curMapArrX) * tileW + startX;
 					tempTile.y = i * tileH + startY;
+					Tile(tempTile).i = i;
+					Tile(tempTile).j = j;
 				}
 			}
 		}
@@ -288,29 +350,44 @@ package
 			{
 				case 1: 
 					tile = new Tile1();
+					Tile(tile).type = 1;
 					break;
 				case 2: 
 					tile = new Tile2();
+					Tile(tile).type = 2;
 					break;
 				case 3: 
 					tile = new Tile3();
+					Tile(tile).type = 3;
 					break;
 				case 4: 
 					tile = new Tile4();
+					Tile(tile).type = 4;
 					break;
 				case 5: 
 					tile = new Tile5();
+					Tile(tile).type = 5;
+					break;
+				case 6:
+					tile = new Tile6();
+					Tile(tile).type = 6;
+					break;
+				case 7:
+					tile = new Ladder();
+					Tile(tile).type = 7;
 					break;
 			}
 			return tile;
 		}
-	
+
+		//khởi tạo tool lúc bắt đầu chơi
 		private function initDefaultTool():void
 		{
 			currentTool = new SmallShovel();
 			addChild(currentTool);
 			currentTool.x = mouseX;
 			currentTool.y = mouseY;
+			currentTool.type = Constant.SMALL_SHOVEL;
 			currentTool.mouseEnabled = false;
 			Mouse.hide();
 		}
@@ -338,21 +415,29 @@ package
 			
 			var smallBomb:SmallBomb = new SmallBomb();
 			toolArray[0].addChild(smallBomb);
+			toolArray[0].txtNumberLeft.visible = false;
+			toolArray[0].txtNumberRight.text = "x" + smallBomb.remains;
 			smallBomb.x = toolBoxWidth / 2-5;
 			smallBomb.y = toolBoxHeight / 2+5;
 			
 			var pickAxe:PickAxe = new PickAxe();
 			toolArray[1].addChild(pickAxe);
+			toolArray[1].txtNumberRight.visible = false;
+			toolArray[1].txtNumberLeft.text = "x" + pickAxe.remains;
 			pickAxe.x = toolBoxWidth / 2-20;
 			pickAxe.y = toolBoxHeight / 2 - 5;
 			
 			var shovel:Shovel = new Shovel();
 			toolArray[2].addChild(shovel);
+			toolArray[2].txtNumberRight.visible = false;
+			toolArray[2].txtNumberLeft.text = "x" + shovel.remains;
 			shovel.x = shovel.width+3;
 			shovel.y = shovel.height + 3;
 			
 			var smallShovel:SmallShovel = new SmallShovel();
 			toolArray[3].addChild(smallShovel);
+			toolArray[3].txtNumberRight.visible = false;
+			toolArray[3].txtNumberLeft.text = "x" + smallShovel.remains;
 			smallShovel.x = smallShovel.width + 7;
 			smallShovel.y = smallShovel.height + 3;
 		}
@@ -364,15 +449,19 @@ package
 			{
 				case "0":
 					currentTool = new SmallBomb();
+					currentTool.type = Constant.SMALL_BOMB;
 					break;
 				case "1":
 					currentTool = new PickAxe();
+					currentTool.type = Constant.PICK_AXE;
 					break;
 				case "2":
 					currentTool = new Shovel();
+					currentTool.type = Constant.SHOVEL;
 					break;
 				case "3":
 					currentTool = new SmallShovel();
+					currentTool.type = Constant.SMALL_SHOVEL;
 					break;
 			}
 			addChild(currentTool);
