@@ -3,6 +3,10 @@ package view
 	import flash.display.MovieClip;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
+	import flash.globalization.LocaleID;
+	import flash.globalization.NumberFormatter;
+	import flash.text.TextFieldAutoSize;
+	import flash.utils.Dictionary;
 	import utils.Constant;
 	import view.Container;
 	/**
@@ -13,13 +17,13 @@ package view
 	{
 		//số hàng trăm là loại của ô đất, số hàng chục là phần thưởng có thể đào được, số hàng đơn vị chỉ định ô đất đã đc nhìn thấy hay chưa
 		public var mapArr:Array = 
-		[ [420,520,120,220,320,420,520,120,220,320,420,520,520,520,520,520,520,520,520,520,520,520,520,520,520,520,520,520,520,520,520,520,520,120,220,320,420,500,510,420],
-		  [421,321,121,221,321,421,521,121,221,321,421,521,521,521,521,521,621,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,121,221,321,421,501,511,421],
+		[ [220,220,220,220,220,220,220,620,220,220,220,220,220,420,520,120,520,520,420,520,520,520,520,520,520,520,520,520,520,520,520,520,520,120,220,320,420,500,510,420],
+		  [420,521,120,220,320,420,521,121,221,321,421,521,521,521,521,521,621,321,321,521,521,521,521,521,521,521,521,521,521,521,521,521,521,121,221,321,421,501,511,421],
 		  [421,501,121,221,321,421,521,121,221,321,421,521,521,321,521,521,621,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,121,221,321,421,501,511,421],
-		  [421,501,121,221,321,421,521,121,221,321,421,521,521,221,321,521,621,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,121,221,321,421,501,511,321],
-		  [421,521,101,221,321,421,521,121,221,321,421,521,521,121,521,521,621,521,321,321,521,521,521,521,521,521,521,521,521,521,521,521,521,121,221,321,421,501,511,221],
+		  [421,501,121,221,321,421,521,121,221,321,421,521,521,221,321,521,621,321,521,521,521,521,521,221,521,521,521,521,521,521,521,521,521,121,221,321,421,501,511,321],
+		  [421,521,101,221,321,421,521,121,221,321,421,521,521,121,521,521,621,521,321,321,521,521,521,521,121,521,521,521,521,521,521,521,521,121,221,321,421,501,511,221],
 		  [401,501,101,221,321,421,521,121,221,321,421,521,521,521,521,521,621,621,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,121,221,321,421,501,511,121],
-		  [401,501,101,221,321,421,521,121,221,321,421,521,521,421,521,521,521,621,521,621,621,521,521,521,521,521,521,521,521,521,521,521,521,121,221,321,421,501,511,521],
+		  [401,501,101,221,321,421,521,121,221,321,421,521,521,421,521,521,521,621,521,621,621,521,521,421,521,521,521,521,521,521,521,521,521,121,221,321,421,501,511,521],
 		  [421,501,121,221,321,421,521,121,221,321,421,521,521,321,521,521,521,621,521,621,621,521,521,521,521,521,521,521,521,521,521,521,521,121,221,321,421,501,511,421],
 		  [421,501,121,221,321,421,521,121,221,321,421,521,521,221,521,521,521,621,621,621,621,521,521,521,521,521,521,521,521,521,521,521,521,121,221,321,421,501,511,321],
 		  [321,201,321,521,521,521,521,521,521,521,521,521,521,121,521,521,521,521,521,621,621,621,521,521,521,521,521,521,521,521,521,521,521,521,521,521,321,401,111,221],
@@ -42,6 +46,7 @@ package view
 		  [321,201,321,521,521,521,521,521,521,521,521,521,521,421,521,521,521,221,221,221,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,221,321,201,111,121],
 		  [321,321,321,321,321,321,321,321,321,321,321,321,321,321,321,321,321,321,321,321,521,521,521,521,521,521,521,521,521,521,521,521,521,521,521,321,321,101,111,121] ];
 		
+		private var _mapDict:Dictionary;
 		public var tile_arr:Array;
 		private var _tileMapArr:Array;
 		
@@ -61,7 +66,7 @@ package view
 		var initArrX:Number = 10;
 		
 		// vùng map được vẽ
-		const SPACE_HEIGHT:Number = 2; //SPACE_HEIGHT chiều cao của không gian trên mặt đất tính theo ô
+		public static const SPACE_HEIGHT:Number = 2; //SPACE_HEIGHT chiều cao của không gian trên mặt đất tính theo ô
 		var visAreaX:Number = screenW;
 		var visAreaY:Number = screenH - SPACE_HEIGHT; 
 		
@@ -79,6 +84,8 @@ package view
 		
 		// movieclip chứa map
 		private var _mapContainer:Container;
+		private var gui:GUI;
+		private var _userInfo:UserInfo;
 		
 		//biến kiểm tra đang rê chuột hay không
 		var isDraggin:Boolean = false;
@@ -93,10 +100,36 @@ package view
 			
 			addChild(mapContainer);
 			
-			buildMap();
+			addUserInfo();
 			
-			this.addEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
-			this.addEventListener(MouseEvent.MOUSE_UP, onMouseUp);
+			gui = new GUI();
+			gui.mouseEnabled = false;
+			addChild(gui);
+			//initMap();
+		}
+		
+		private function addUserInfo():void 
+		{
+			_userInfo = new UserInfo();
+			_userInfo.txtUsername.text = "Elsa";
+			trace(userInfo.width);
+			_userInfo.txtUsername.autoSize = TextFieldAutoSize.LEFT;
+			trace(userInfo.width);
+			_userInfo.txtGold.x = userInfo.txtUsername.x + userInfo.txtUsername.width + 10;
+			addChild(_userInfo);
+			_userInfo.x = 20;
+			_userInfo.y = 20;
+			_userInfo.currentGold = 50000;
+			_userInfo.updateGold();
+		}
+		
+		public function getTileType(i:Number, j:Number):Number
+		{
+			if (mapDict[i][j])
+			{
+				return mapDict[i][j];
+			}
+			return -1;
 		}
 		
 		private function buildMap():void
@@ -106,9 +139,15 @@ package view
 			
 			tile_arr = new Array();
 			tileMapArr = new Array();
+			//trace("GameScreen 108 " + mapDict.length);
+			var mapLength:Number = Constant.PRELOAD_SIZE * 2 + Constant.SCREEN_WIDTH;
 			for (var k:int = 0; k < mapArr.length; k++) 
 			{
 				tileMapArr[k] = new Array();
+				for (var l:int = 0; l < mapArr[0].length; l++) 
+				{
+					tileMapArr[k][l] = new Array();
+				}
 			}
 			var tmp_arr:Array;
 			
@@ -119,92 +158,48 @@ package view
 				tile_arr[tile_arr.length] = tmp_arr;
 				for (var j:Number = curMapArrX; j < visAreaX + curMapArrX + 1; ++j)  //+ 1 cột tile được vẽ trước ở bên phải
 				{
-					//tempTile = new Tile();
-					//var new_graphic:MovieClip;
 					if (mapArr[i][j] % 10 == 1)
 					{
-						//new_graphic = createTileGraphic(Constant.TILE_TYPE_FOG);
 						tempTile = mapContainer.createTile(Constant.TILE_TYPE_FOG, j * tileW, i * tileH, i, j);
 					}
 					else
 					{
-						//new_graphic = createTileGraphic(int(mapArr[i][j] / 100));
 						tempTile = mapContainer.createTile(int(mapArr[i][j] / 100), j * tileW, i * tileH, i, j);  
+						if (i == 0) 
+						{
+							tempTile.removeChildAt(0);
+							var new_graphic:MovieClip;
+							if (int(mapArr[i][j] / 100) == Constant.TILE_TYPE_TYPE6)
+							{
+								new_graphic = mapContainer.createTileGraphic(int(mapArr[i][j] / 100), 2);
+							}
+							else
+							{
+								new_graphic = mapContainer.createTileGraphic(int(mapArr[i][j] / 100), 1);
+							}
+							tempTile.addChild(new_graphic);
+						}
 					}
-					//tempTile.addChild(new_graphic);
 					
 					tmp_arr[tmp_arr.length] = tempTile;
 					tileMapArr[i][j] = tempTile;
 					
 					mapContainer.addChild(tempTile);
-					//tempTile.x = j * tileW;
-					//tempTile.y = i * tileH;
-					//tempTile.i = i;
-					//tempTile.j = j;
 				}
 			}
 			mapContainer.initListener();
 			mapContainer.addHighLight();
-			//trace(tileMapArr);
 		}
 		
-		// tạo tile theo tham số tương ứng từ mảng 2 chiều
-		/*private function createTile(i:Number):Tile
+		private function onMouseOut(e:Event):void 
 		{
-			var tile:Tile;
-			switch (i)
-			{
-				case 1: 
-					tile = new Tile1();
-					//tile.container = mapContainer;
-					tile.type = 1;
-					break;
-				case 2: 
-					tile = new Tile2();
-					//tile.container = mapContainer;
-					tile.type = 2;
-					break;
-				case 3: 
-					tile = new Tile3();
-					//tile.container = mapContainer;
-					tile.type = 3;
-					break;
-				case 4: 
-					tile = new Tile4();
-					//tile.container = mapContainer;
-					tile.type = 4;
-					break;
-				case 5: 
-					tile = new Tile5();
-					//tile.container = mapContainer;
-					tile.type = 5;
-					break;
-				case 6:
-					tile = new Tile6();
-					//tile.container = mapContainer;
-					tile.type = 6;
-					break;
-				case 7:
-					tile = new Ladder();
-					//tile.container = mapContainer;
-					tile.type = 7;
-					break;
-			}
-			tile.addEventListener(Tile.CLICK, onClick);
-			tile.addEventListener(Tile.ROLL_OVER, onRollOver);
-			tile.addEventListener(Tile.ROLL_OUT, onRollOut);
-			mapContainer.addHighLight();
-			return tile;
-		}*/
-		
-		private function onRollOut(e:Event):void 
-		{
-			mapContainer.onRollOut(e);
+			mapContainer.onMouseOut(e);
 		}
 		
-		private function onRollOver(e:Event):void 
+		private function onMouseOver(e:Event):void 
 		{
-			mapContainer.onRollOver(e);
+			trace("??");
+			mapContainer.onMouseOver(e);
 		}
 		
 		private function onClick(e:Event):void 
@@ -260,10 +255,23 @@ package view
 						if (mapArr[tempTile.i][tempTile.j - visAreaX - 1] % 10 == 1)
 						{
 							new_graphic = mapContainer.createTileGraphic(Constant.TILE_TYPE_FOG);
+							tempTile.type = 8;
 						}
 						else
 						{
-							new_graphic = mapContainer.createTileGraphic(int(mapArr[tempTile.i][tempTile.j - visAreaX - 1] / 100));  
+							new_graphic = mapContainer.createTileGraphic(int(mapArr[tempTile.i][tempTile.j - visAreaX - 1] / 100)); 
+							if (i == 0) 
+							{
+								if (int(mapArr[tempTile.i][tempTile.j - visAreaX - 1] / 100) == Constant.TILE_TYPE_TYPE6)
+								{
+									new_graphic = mapContainer.createTileGraphic(int(mapArr[tempTile.i][tempTile.j - visAreaX - 1] / 100), 2);
+								}
+								else
+								{
+									new_graphic = mapContainer.createTileGraphic(int(mapArr[tempTile.i][tempTile.j - visAreaX - 1] / 100), 1);
+								}
+							}
+							tempTile.type = int(mapArr[tempTile.i][tempTile.j - visAreaX - 1] / 100);
 						}
 						tempTile.removeChildAt(0);
 						tempTile.addChild(new_graphic);
@@ -299,10 +307,23 @@ package view
 						if (mapArr[tempTile.i][tempTile.j + visAreaX + 1] % 10 == 1)
 						{
 							new_graphic = mapContainer.createTileGraphic(Constant.TILE_TYPE_FOG);
+							tempTile.type = 8;
 						}
 						else
 						{
-							new_graphic = mapContainer.createTileGraphic(int(mapArr[tempTile.i][tempTile.j + visAreaX + 1] / 100));  
+							new_graphic = mapContainer.createTileGraphic(int(mapArr[tempTile.i][tempTile.j + visAreaX + 1] / 100));
+							if (i == 0) 
+							{
+								if (int(mapArr[tempTile.i][tempTile.j + visAreaX + 1] / 100) == Constant.TILE_TYPE_TYPE6)
+								{
+									new_graphic = mapContainer.createTileGraphic(int(mapArr[tempTile.i][tempTile.j + visAreaX + 1] / 100), 2);
+								}
+								else
+								{
+									new_graphic = mapContainer.createTileGraphic(int(mapArr[tempTile.i][tempTile.j + visAreaX + 1] / 100), 1);
+								}
+							}
+							tempTile.type = int(mapArr[tempTile.i][tempTile.j + visAreaX + 1] / 100);
 						}
 						tempTile.removeChildAt(0);
 						tempTile.addChild(new_graphic);
@@ -337,10 +358,23 @@ package view
 						if (mapArr[tempTile.i + screenH + 1][tempTile.j] % 10 == 1)
 						{
 							new_graphic = mapContainer.createTileGraphic(Constant.TILE_TYPE_FOG);
+							tempTile.type = 8;
 						}
 						else
 						{
-							new_graphic = mapContainer.createTileGraphic(int(mapArr[tempTile.i + screenH + 1][tempTile.j] / 100));  
+							new_graphic = mapContainer.createTileGraphic(int(mapArr[tempTile.i + screenH + 1][tempTile.j] / 100)); 
+							if (i == 0) 
+							{
+								if (int(mapArr[tempTile.i + screenH + 1][tempTile.j] / 100) == Constant.TILE_TYPE_TYPE6)
+								{
+									new_graphic = mapContainer.createTileGraphic(int(mapArr[tempTile.i + screenH + 1][tempTile.j] / 100), 2);
+								}
+								else
+								{
+									new_graphic = mapContainer.createTileGraphic(int(mapArr[tempTile.i + screenH + 1][tempTile.j] / 100), 1);
+								}
+							}
+							tempTile.type = int(mapArr[tempTile.i + screenH + 1][tempTile.j] / 100);
 						}
 						tempTile.removeChildAt(0);
 						tempTile.addChild(new_graphic);
@@ -375,10 +409,23 @@ package view
 						if (mapArr[tempTile.i - screenH - 1][tempTile.j] % 10 == 1)
 						{
 							new_graphic = mapContainer.createTileGraphic(Constant.TILE_TYPE_FOG);
+							tempTile.type = 8;
 						}
 						else
 						{
 							new_graphic = mapContainer.createTileGraphic(int(mapArr[tempTile.i - screenH - 1][tempTile.j] / 100));  
+							if (i == 0) 
+							{
+								if (int(mapArr[tempTile.i - screenH - 1][tempTile.j] / 100) == Constant.TILE_TYPE_TYPE6)
+								{
+									new_graphic = mapContainer.createTileGraphic(int(mapArr[tempTile.i - screenH - 1][tempTile.j] / 100), 2);
+								}
+								else
+								{
+									new_graphic = mapContainer.createTileGraphic(int(mapArr[tempTile.i - screenH - 1][tempTile.j] / 100), 1);
+								}
+							}
+							tempTile.type = int(mapArr[tempTile.i - screenH - 1][tempTile.j] / 100);
 						}
 						tempTile.removeChildAt(0);
 						tempTile.addChild(new_graphic);
@@ -401,6 +448,7 @@ package view
 			}
 			
 			e.updateAfterEvent();
+			//trace(mapContainer.x + "," + mapContainer.y);
 		}
 		
 		private function onMouseUp(e:MouseEvent):void
@@ -423,6 +471,14 @@ package view
 			//prevMousePoint = new Point(e.stageX, e.stageY);
 		}
 		
+		public function initMap():void 
+		{
+			buildMap();
+			
+			this.addEventListener(MouseEvent.MOUSE_DOWN, onMouseDown);
+			this.addEventListener(MouseEvent.MOUSE_UP, onMouseUp);
+		}
+		
 		public function get mapContainer():Container 
 		{
 			return _mapContainer;
@@ -441,6 +497,26 @@ package view
 		public function set tileMapArr(value:Array):void 
 		{
 			_tileMapArr = value;
+		}
+		
+		public function get mapDict():Dictionary 
+		{
+			return _mapDict;
+		}
+		
+		public function set mapDict(value:Dictionary):void 
+		{
+			_mapDict = value;
+		}
+		
+		public function get userInfo():UserInfo 
+		{
+			return _userInfo;
+		}
+		
+		public function set userInfo(value:UserInfo):void 
+		{
+			_userInfo = value;
 		}
 		
 	}

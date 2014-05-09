@@ -1,0 +1,26 @@
+JSON
+1. >> Login
+	>> 
+	<< Player info: số lượng tool mỗi loại, số vàng,...
+2. << Chat
+3. << System notification
+4. << Map info
+	<< lần đầu chơi: chỉ trả về list giá trị các ô ở dòng 1
+	<< sau khi đã đào được 1 thời gian: trả về tất cả các ô đã đào được
+5. << >> Dig action
+	>> tọa độ user vừa đào
+	<< giá trị phần thưởng (nếu có) + giá trị các ô mới được gen thêm (kể cả hầm)
+
+	JSON -> hàm + i + j -> = map[i][j]
+	dict[i][j]
+	
+	[]
+	
+{
+	"employees": 
+	[
+		{ "firstName":"John" , "lastName":"Doe" }, 
+		{ "firstName":"Anna" , "lastName":"Smith" }, 
+		{ "firstName":"Peter" , "lastName":"Jones" }
+	]
+}

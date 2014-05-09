@@ -10,9 +10,9 @@ package utils
 		public static const SHOVEL:Number = 1;
 		public static const PICK_AXE:Number = 2;
 		public static const SMALL_BOMB:Number = 3;
+		public static const BIG_BOMB:Number = 4;
 		
 		public static const TILE_TYPE_FOG:Number = 8;
-		public static const TILE_TYPE_LADDER:Number = 7;
 		public static const TILE_TYPE_TYPE1:Number = 1;
 		public static const TILE_TYPE_TYPE2:Number = 2;
 		public static const TILE_TYPE_TYPE3:Number = 3;
@@ -30,6 +30,12 @@ package utils
 		
 		public static const SCREEN_WIDTH:Number = 25;
 		public static const SCREEN_HEIGHT:Number = 15;
+		
+		public static const NORMAL_THEME:Number = 0;
+		public static const ICE_THEME:Number = 1;
+		public static const VOLCANO_THEME:Number = 2;
+		
+		public static const PRELOAD_SIZE:Number = 10;
 		
 		public function Constant() 
 		{

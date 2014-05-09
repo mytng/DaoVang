@@ -1,6 +1,7 @@
 package view
 {
 	import flash.display.MovieClip;
+	import flash.events.MouseEvent;
 	
 	/**
 	 * ...
@@ -13,6 +14,20 @@ package view
 		
 		public function Tool() 
 		{
+			this.mouseEnabled = false;
+			this.mouseChildren = false;
+			addEventListener(MouseEvent.MOUSE_OVER, onMouseOver);
+			addEventListener(MouseEvent.CLICK, onMouseClick);
+		}
+		
+		private function onMouseClick(e:MouseEvent):void 
+		{
+			trace("kill urself");
+		}
+		
+		private function onMouseOver(e:MouseEvent):void 
+		{
+			trace("why");
 		}
 		
 		public function get remains():Number 

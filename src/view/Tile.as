@@ -15,8 +15,8 @@ package view
 	public class Tile extends MovieClip 
 	{
 		public static var CLICK:String = "custom.click";
-		public static var ROLL_OVER:String = "mouse.over";
-		public static var ROLL_OUT:String = "roll.out";
+		public static var MOUSE_OVER:String = "mouse.over";
+		public static var MOUSE_OUT:String = "mouse.out";
 		
 		//var hightLight:HightLight;
 		private var _type:Number;
@@ -25,8 +25,8 @@ package view
 		
 		public function Tile() 
 		{
-			addEventListener(MouseEvent.MOUSE_OVER, onRollOver);
-			addEventListener(MouseEvent.MOUSE_OUT, onRollOut);
+			addEventListener(MouseEvent.MOUSE_OVER, onMouseOver);
+			addEventListener(MouseEvent.MOUSE_OUT, onMouseOut);
 			addEventListener(MouseEvent.CLICK, onClick);
 			
 			addEventListener(Event.REMOVED_FROM_STAGE, onRemoved);
@@ -36,8 +36,8 @@ package view
 		{
 			removeEventListener(Event.REMOVED_FROM_STAGE, onRemoved);
 			
-			removeEventListener(MouseEvent.MOUSE_OVER, onRollOver);
-			removeEventListener(MouseEvent.MOUSE_OUT, onRollOut);
+			removeEventListener(MouseEvent.MOUSE_OVER, onMouseOver);
+			removeEventListener(MouseEvent.MOUSE_OUT, onMouseOut);
 			removeEventListener(MouseEvent.CLICK, onClick);
 		}
 		
@@ -48,18 +48,19 @@ package view
 		
 		
 		
-		private function onRollOut(e:MouseEvent):void 
+		private function onMouseOut(e:MouseEvent):void 
 		{
-			dispatchEvent(new CustomEvent(ROLL_OUT, false, false, e.currentTarget));
+			dispatchEvent(new CustomEvent(MOUSE_OUT, false, false, e.currentTarget));
 		}
 		
-		private function onRollOver(e:MouseEvent):void 
+		private function onMouseOver(e:MouseEvent):void 
 		{
+			//trace("OVER");
 			//container.setChildIndex(this, container.numChildren - 1);
 			//hightLight = new HightLight();
 			//hightLight.mouseEnabled = false;
 			//addChild(hightLight);
-			dispatchEvent(new CustomEvent(ROLL_OVER, false, false, e.currentTarget));
+			dispatchEvent(new CustomEvent(MOUSE_OVER, false, false, e.currentTarget));
 		}
 		
 		public function get type():Number 
